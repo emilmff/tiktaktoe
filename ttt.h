@@ -25,7 +25,7 @@ public:
 	std::vector<int> search_direction(int, int, int, int, int);
 	static std::vector<std::vector<int>> get_major_dirs();
 	std::vector<std::vector<int>> get_involved_dirs(int, int);
-	std::vector<int> get_end(int, int, int, int,int distance);
+	std::vector<int> get_end(int, int, int, int,int );
 	int is_end(int,int);
 	board* play_turn(int r, int c);
 };
@@ -45,16 +45,19 @@ public:
 	void print_board();
 	player* get_player();
 	int game_loop(bool print);
+	~engine();
 };
 
 class player{
 public:
 	virtual std::vector<int> get_turn(board*) = 0;
+	virtual ~player();
 };
 
 class human_player : public player {
 public:
 	virtual std::vector<int> get_turn(board*);
+	~human_player();
 };
 
 class minimax_player : public player {
@@ -63,6 +66,7 @@ class minimax_player : public player {
 public:
 	minimax_player(int);
 	virtual std::vector<int> get_turn(board*);
+	~minimax_player();
 };
 
 void play(char);

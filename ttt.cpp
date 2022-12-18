@@ -213,6 +213,15 @@ int engine::game_loop(bool print)
 	}
 }
 
+engine::~engine() {
+	delete p1;
+	delete p2;
+	delete b;
+}
+
+player::~player() {
+}
+
 std::vector<int> human_player::get_turn(board* b)
 {
 	int r, c;
@@ -220,6 +229,11 @@ std::vector<int> human_player::get_turn(board* b)
 		std::cin >> r >> c;
 		if(b->is_valid_move(r,c)) return { r, c };
 	}
+}
+
+human_player::~human_player()
+{
+
 }
 
 minimax_player::minimax_player(int d)
@@ -291,6 +305,11 @@ std::vector<int> minimax_player::get_turn(board* b)
 	std::vector<int> val_move = minimax(b, depth, -2, 2, true, -1, -1);
 	return { val_move[1],val_move[2] };
 }
+
+minimax_player::~minimax_player()
+{
+}
+
 
 void play(char player)
 {
@@ -373,8 +392,10 @@ void play(int num)
 			break;
 		case 2:
 			std::cout << "N";
+			break;
 		}
 		num--;
+		delete game;
 	}
 }
 
